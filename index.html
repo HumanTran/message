@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lời Nhắn Đến Tương Lai</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400;1,500&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000;
+            color: #E0E0E0;
+            font-family: 'Playfair Display', serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background-color: #000;
+        }
+
+        .message-container {
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            backdrop-filter: blur(3px);
+            transition: padding 0.3s ease; /* Thêm hiệu ứng chuyển động mượt */
+        }
+
+        .line {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+            margin: 2rem 0;
+            font-size: 2.2rem;
+            font-weight: 500;
+            font-style: italic;
+            letter-spacing: 1.5px;
+            line-height: 1.6;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.4),
+                         0 0 5px rgba(255, 255, 255, 0.3);
+        }
+
+        /* --- TỐI ƯU CHO GIAO DIỆN DI ĐỘNG --- */
+        @media (max-width: 768px) {
+            .message-container {
+                /* Giảm padding hai bên để có nhiều không gian hơn */
+                padding: 2rem 1rem;
+                width: 90%; /* Đảm bảo container không bị quá rộng */
+            }
+
+            .line {
+                /* 
+                   Sử dụng đơn vị 'vw' (viewport width) 
+                   để font chữ tự động co giãn theo chiều rộng màn hình.
+                   Đây là chìa khóa để giữ cho câu nằm trên một dòng.
+                */
+                font-size: 4vw; 
+                letter-spacing: 1px; /* Giảm khoảng cách chữ một chút */
+                margin: 1.5rem 0;
+            }
+        }
+
+        /* Tối ưu cho màn hình rất nhỏ */
+        @media (max-width: 380px) {
+             .line {
+                font-size: 4.2vw;
+             }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="particles-js"></div>
+
+    <div class="message-container">
+        <p class="line">Hãy nói với anh rằng ở tương lai anh sẽ là một người khác</p>
+        <p class="line">Sẽ không còn phải sợ hãi bản thân mình rồi ngờ vực người khác</p>
+        <p class="line">Anh đã từng thấy cái giá phải trả và anh luôn mong mình không vậy</p>
+        <p class="line">Hãy nói rằng anh của những ngày sau là người em có thể trông cậy</p>
+    </div>
+
+    <!-- Script cho hiệu ứng hạt lấp lánh -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script>
+        particlesJS("particles-js", {
+            "particles": {
+                "number": { "value": 60, "density": { "enable": true, "value_area": 800 }},
+                "color": { "value": "#ffffff" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.5, "random": true },
+                "size": { "value": 3, "random": true },
+                "line_linked": { "enable": false },
+                "move": { "enable": true, "speed": 0.8, "direction": "none", "random": true, "straight": false, "out_mode": "out", "bounce": false }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": { "onhover": { "enable": true, "mode": "repulse" }, "onclick": { "enable": true, "mode": "push" }, "resize": true },
+                "modes": { "repulse": { "distance": 100, "duration": 0.4 }, "push": { "particles_nb": 4 }}
+            },
+            "retina_detect": true
+        });
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const lines = document.querySelectorAll('.line');
+            let delay = 500;
+            lines.forEach(line => {
+                setTimeout(() => {
+                    line.style.opacity = '1';
+                    line.style.transform = 'translateY(0)';
+                }, delay);
+                delay += 1800;
+            });
+        });
+    </script>
+</body>
+</html>
